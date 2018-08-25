@@ -19,11 +19,26 @@ let playerFactory = function playerFactory() {
 
 let gameFactory = function gameFactory() {
 	let gf = {
-	
+		gameCanvas,
+		gameCtx,
+		width,
+		height,
+		player: playerFactory(),
+		initialize: function() {
+			this.gameCanvas = $('#gameArea');
+			this.gameCtx = this.gameCanvas.getContext('2d');
+			this.width = this.gameCanvas.width;
+			this.height = this.gameCanvas.height;
+		}
 	};
 	return gf;
 };
 
 let initGame = function initGame() {
-	
+		let game = gameFactory();
+		game.initialize();
+		console.log(game);
+		console.log(game.player);
 };
+
+$(document).ready(initGame);
