@@ -1,26 +1,37 @@
-let playerFactory = function playerFactory() {
-	//TODO: Make this factory parameterized to make multiple players
-	let pf = {
-		xPos: 20,
-		yPos: 20,
-		createSprite: function() {
-			this.sprite.imageCanvas = document.createElement('canvas');
-			this.sprite.imageCanvas.width = 64;
-			this.sprite.imageCanvas.height = 64;
-			this.sprite.imageCtx = this.sprite.imageCanvas.getContext("2d");
+let spriteFactory = function spriteFactory(posx, posy, w, h, xvel = 0, yvel = 0) {
+	let sf = {
+		xPos: posx,
+		yPos: posy,
+		width: w,
+		height: h,
+		xVelocity : xvel,
+		yVelocity : yvel,
+		imageCanvas,
+		imageCtx,
+		initialize: function() {
+			this.imageCanvas = document.createElement('canvas');
+			this.imageCanvas.width = this.width;
+			this.imageCanvas.height = this.height;
+			this.imageCtx = this.imageCanvas.getContext('2d');
 		},
-		sprite: {
-			//TODO: Make a Sprite object
-			imageCanvas: null,
-			imageCtx: null
+		update: function() {
+			this.xPos += this.xVelocity;
+			this.yPos += this.yVelocity;
 		},
 		render: function() {
-			this.sprite.imageCtx.beginPath();
-			this.sprite.imageCtx.fillStyle = 'red';
-			this.sprite.imageCtx.strokeStyle = 'red';
-			this.sprite.imageCtx.arc(32, 32, 32, 0, Math.PI*2);
-			this.sprite.imageCtx.fill();
-		}
+			this.imageCtx.beginPath();
+			this.imageCtx.fillStyle = 'red';
+			this.imageCtx.strokeStyle = 'red';
+			this.imageCtx.arc(32, 32, 32, 0, Math.PI*2);
+			this.imageCtx.fill();
+		}	
+	};
+	return pf;
+};
+
+let playerFactory = function playerFactory() {
+	let pf = {
+		sprite: spriteFactory()
 	};
 	return pf;
 };
