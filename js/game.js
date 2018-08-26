@@ -31,7 +31,11 @@ let spriteFactory = function spriteFactory(posx, posy, w, h, xvel = 0, yvel = 0)
 
 let playerFactory = function playerFactory() {
 	let pf = {
-		sprite: spriteFactory()
+		sprite: spriteFactory(),
+		initialize: function() {
+			this.sprite.initialize();
+			
+		}
 	};
 	return pf;
 };
