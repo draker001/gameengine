@@ -1,8 +1,8 @@
 let playerFactory = function playerFactory() {
 	//TODO: Make this factory parameterized to make multiple players
 	let pf = {
-		xPos: 50,
-		yPos: 750,
+		xPos: 20,
+		yPos: 20,
 		createSprite: function() {
 			this.sprite.imageCanvas = document.createElement('canvas');
 			this.sprite.imageCanvas.width = 64;
@@ -16,8 +16,8 @@ let playerFactory = function playerFactory() {
 		},
 		render: function() {
 			this.sprite.imageCtx.beginPath();
-			this.sprite.imageCtx.fillStyle = 0xFF0000;
-			this.sprite.imageCts.strokeStyle = 0xFF0000;
+			this.sprite.imageCtx.fillStyle = 'red';
+			this.sprite.imageCtx.strokeStyle = 'red';
 			this.sprite.imageCtx.arc(32, 32, 32, 0, Math.PI*2);
 			this.sprite.imageCtx.fill();
 		}
@@ -37,10 +37,11 @@ let gameFactory = function gameFactory() {
 			this.gameCtx = this.gameCanvas.getContext('2d');
 			this.width = this.gameCanvas.width;
 			this.height = this.gameCanvas.height;
+			this.player.createSprite();
 		},
 		render: function() {
 			this.player.render();
-			this.gameCtx.drawImage(this.player.imageCtx.getImageData(), this.player.xPos, this.player.yPos);
+			this.gameCtx.drawImage(this.player.sprite.imageCanvas, this.player.xPos, this.player.yPos);
 		}
 	};
 	return gf;
