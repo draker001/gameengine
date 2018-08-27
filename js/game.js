@@ -6,8 +6,8 @@ let spriteFactory = function spriteFactory(posx, posy, w, h, xvel = 0, yvel = 0)
 		height: h,
 		xVelocity : xvel,
 		yVelocity : yvel,
-		imageCanvas,
-		imageCtx,
+		imageCanvas: null,
+		imageCtx: null,
 		initialize: function() {
 			this.imageCanvas = document.createElement('canvas');
 			this.imageCanvas.width = this.width;
@@ -26,15 +26,21 @@ let spriteFactory = function spriteFactory(posx, posy, w, h, xvel = 0, yvel = 0)
 			this.imageCtx.fill();
 		}	
 	};
-	return pf;
+	return sf;
 };
 
 let playerFactory = function playerFactory() {
 	let pf = {
-		sprite: spriteFactory(),
+		sprite: spriteFactory(20, 20, 64, 64),
 		initialize: function() {
 			this.sprite.initialize();
-			
+			window.onkeydown = this.handleKeys;
+		},
+		handleKeys: function(event) {
+			console.log(event);
+		},
+		render: function() {
+			this.sprite.render();
 		}
 	};
 	return pf;
@@ -48,15 +54,15 @@ let gameFactory = function gameFactory() {
 		height: 0,
 		player: playerFactory(),
 		initialize: function() {
+			this.player.initialize();
 			this.gameCanvas = document.getElementById('gameArea');
 			this.gameCtx = this.gameCanvas.getContext('2d');
 			this.width = this.gameCanvas.width;
 			this.height = this.gameCanvas.height;
-			this.player.createSprite();
 		},
 		render: function() {
 			this.player.render();
-			this.gameCtx.drawImage(this.player.sprite.imageCanvas, this.player.xPos, this.player.yPos);
+			this.gameCtx.drawImage(this.player.sprite.imageCanvas, this.player.sprite.xPos, this.player.sprite.yPos);
 		}
 	};
 	return gf;
