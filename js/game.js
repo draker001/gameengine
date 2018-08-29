@@ -38,9 +38,10 @@ let playerFactory = function playerFactory() {
 		},
 		handleKeys: function(event) {
 			let key = event.key;
-			if(key == null) rueturn;
-			if( key === 'ArrowUp' {
-				if sprite.yPos < 0) {
+			if(key == null) 
+				return;
+			if( key === 'ArrowUp') {
+				if( sprite.yPos < 0) {
 					sprite.yPos = 0;
 				} else {
 					sprite.yPos -= sprite.yVelocity;
@@ -90,10 +91,12 @@ let gameFactory = function gameFactory() {
 			this.gameCtx = this.gameCanvas.getContext('2d');
 			this.width = this.gameCanvas.width;
 			this.height = this.gameCanvas.height;
+			this.render = this.render.bind(this);
 		},
 		render: function() {
 			this.player.render();
 			this.gameCtx.drawImage(this.player.sprite.imageCanvas, this.player.sprite.xPos, this.player.sprite.yPos);
+			window.requestAnimationFrame(this.render);
 		}
 	};
 	return gf;
@@ -102,7 +105,7 @@ let gameFactory = function gameFactory() {
 let initGame = function initGame() {
 	let game = gameFactory();
 	game.initialize();
-	game.render();
+	window.requestAnimationFrame(game.render);
 };
 
 $(document).ready(initGame);
