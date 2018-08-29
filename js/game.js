@@ -31,13 +31,44 @@ let spriteFactory = function spriteFactory(posx, posy, w, h, xvel = 0, yvel = 0)
 
 let playerFactory = function playerFactory() {
 	let pf = {
-		sprite: spriteFactory(20, 20, 64, 64),
+		sprite: spriteFactory(20, 20, 64, 64, 64, 64),
 		initialize: function() {
 			this.sprite.initialize();
 			window.onkeydown = this.handleKeys;
 		},
 		handleKeys: function(event) {
-			console.log(event);
+			let key = event.key;
+			if(key == null) rueturn;
+			if( key === 'ArrowUp' {
+				if sprite.yPos < 0) {
+					sprite.yPos = 0;
+				} else {
+					sprite.yPos -= sprite.yVelocity;
+				}
+			}
+			if( key === 'ArrowDown') {
+				if(sprite.yPos > 600) { //TODO: have the width and height passed in
+					sprite.ypos = 600;
+				} else {
+					sprite.yPos += sprite.yVelocity;
+				}
+			}
+			if( key === 'ArrowLeft') {
+				if( sprite.xPos < 0) {
+					sprite.xPos = 0;
+				} else {
+					sprite.xPos -= sprite.xVelocity;
+				}
+			}
+			if( key === 'ArrowRight') {
+				if( sprite.xPos > 800) {
+					xprite.xPos = 800;
+				}
+				else {
+					sprite.xPos += xprite.xVelocity;
+				}
+			}
+				
 		},
 		render: function() {
 			this.sprite.render();
