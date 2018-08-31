@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"dependencies": {
 		"jquery": "^3.3.1",
-		"pixi.js": "^4.0"
+		"pixi.js": "^4.8.1"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.23.0",
