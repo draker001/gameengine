@@ -7,7 +7,15 @@
 		<script src='js/pixi.js'></script>
 	</head>
 	<body>
-		<canvas id="gameArea" width="800" heigt="600"></canvas>
-		<script src="js/game.js"></script>
+		<script>
+		let type="WebGL";
+		if(!PIXI.utils.isWebGLSupported()) {
+			type="canvas";
+		}
+		
+		PIXI.utils.sayHello(type);
+		</script>
+		<!-- <canvas id="gameArea" width="800" heigt="600"></canvas>
+		<script src="js/game.js"></script> -->
 	</body>
 </html>
